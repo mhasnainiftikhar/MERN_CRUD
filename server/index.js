@@ -4,14 +4,13 @@ const cors = require("cors");
 const UserModel = require("./models/Users");
 
 const app = express();
-app.use(cors(
-  {
-    origin: ["https://mern-crud-frontend-peach.vercel.app"], 
-    methods: ["POST", "GET", "PUT", "DELETE"], 
-    credentials: true
-}
-
-));
+app.use(
+  cors({
+    origin: "https://mern-crud-frontend-peach.vercel.app", 
+    methods: ["GET", "POST", "PUT", "DELETE"], 
+    credentials: true, 
+  })
+);
 app.use(express.json());
 
 // MongoDB Connection 
