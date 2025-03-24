@@ -10,7 +10,7 @@ function UpdateUser() {
   const [age, setAge] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:3000/users/${id}`)
+    fetch(`https://mern-crud-api-alpha.vercel.app/users/${id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.msg) {

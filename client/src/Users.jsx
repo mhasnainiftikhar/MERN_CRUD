@@ -20,7 +20,7 @@ function Users() {
   // Delete user function
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/users/${id}`);
+      await axios.delete(`https://mern-crud-api-alpha.vercel.app/users/${id}`);
       setUsers(users.filter((user) => user._id !== id));
     } catch (error) {
       console.error("Error deleting user:", error);
