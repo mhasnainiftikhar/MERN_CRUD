@@ -15,7 +15,7 @@ function CreateUser() {
     console.log("Sending Data:", userData);
 
     try {
-      const response = await axios.post("https://mern-crud-api-alpha.vercel.app", userData, {
+      const response = await axios.post("https://mern-crud-api-alpha.vercel.app/createUser", userData, {
         headers: { "Content-Type": "application/json" },
       });
 
