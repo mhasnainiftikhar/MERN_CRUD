@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -7,28 +6,31 @@ const UserModel = require("./models/Users");
 const app = express();
 app.use(
   cors({
-    origin: "https://mern-crud-frontend-peach.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
+    origin: "https://mern-crud-frontend-peach.vercel.app", 
+    methods: ["GET", "POST", "PUT", "DELETE"], 
+    credentials: true, 
   })
 );
 app.use(express.json());
 
-// MongoDB Connection
+// MongoDB Connection 
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("✅ MongoDB connected successfully!"))
-  .catch((err) => console.error("❌ MongoDB connection error:", err));
+  .connect(
+    "mongodb+srv://hasnainiftikhar930:EY4VOBV0cDsVVlpt@crud.abgd7.mongodb.net/?retryWrites=true&w=majority&appName=crud",
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
+  .then(() => console.log("MongoDB connected successfully!"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
 // Fetch Single User
 app.get("/users/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const user = await UserModel.findById(id);
-    if (!user) return res.status(404).json({ msg: "User not found" });
+
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
 
     res.json(user);
   } catch (error) {
@@ -49,8 +51,11 @@ app.get("/users", async (req, res) => {
 
 // Create a New User
 app.post("/createUser", async (req, res) => {
+  console.log("Received Request Body:", req.body); 
+
   try {
     const { name, email, age } = req.body;
+
     if (!name || !email || !age) {
       return res
         .status(400)
@@ -112,7 +117,7 @@ app.delete("/users/:id", async (req, res) => {
 });
 
 // Start Server
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
