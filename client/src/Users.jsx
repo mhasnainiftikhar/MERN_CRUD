@@ -8,7 +8,7 @@ function Users() {
   // Fetch users from the backend
   useEffect(() => {
     axios
-      .get("http://localhost:3000/users")
+      .get("https://mern-crud-api-alpha.vercel.app/users")
       .then((response) => {
         setUsers(response.data);
       })
